@@ -70,7 +70,7 @@ const Header = () => {
                         </Nav>
                         <Nav >
                             <Nav.Link href="/login">Staff</Nav.Link>
-                            <Nav.Link href="/admin/login">Admins</Nav.Link>
+                            <Nav.Link href="/admin/login">Registry</Nav.Link>
                         </Nav>
 
                     </Navbar.Collapse>

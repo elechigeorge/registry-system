@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Carousel, Container } from 'react-bootstrap';
-import One from '../images/1.jpg'
-import Two from '../images/2.jpg'
-import Three from '../images/3.jpg'
-
+import One from '../images/burser.jpg'
+import Two from '../images/rector.jpg'
+import Three from '../images/reg-building.jpg'
 
 function HomeScreen() {
 
@@ -25,8 +24,8 @@ function HomeScreen() {
                         style={{ height: '70vh' }}
                     />
                     <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <h3>Office of the burser</h3>
+                        <p>The bursery office building</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -38,8 +37,8 @@ function HomeScreen() {
                     />
 
                     <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h3>The Office of the Rector</h3>
+                        <p>The rectory office building</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -51,9 +50,9 @@ function HomeScreen() {
                     />
 
                     <Carousel.Caption>
-                        <h3>Third slide label</h3>
+                        <h3>The Office of the Registrar</h3>
                         <p>
-                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                            The Registrar office building
           </p>
                     </Carousel.Caption>
                 </Carousel.Item>
