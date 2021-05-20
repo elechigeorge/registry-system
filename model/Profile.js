@@ -6,6 +6,9 @@ const ProfileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    title: {
+        type: String
+    },
     fullname: {
         type: String,
         required: true
@@ -20,6 +23,12 @@ const ProfileSchema = new mongoose.Schema({
         type: String
     },
     status: {
+        type: String
+    },
+    marital_status: {
+        type: String
+    },
+    children: {
         type: String
     },
     fa_date: {

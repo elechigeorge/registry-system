@@ -1,16 +1,16 @@
-const User = require('../model/User');
+const Admin = require('../model/Admin');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
 
-const getUser = async (req, res) => {
+const getAdmin = async (req, res) => {
 
     try {
-        const user = await User.findById(req.user.id).select('-password');
+        const admin = await Admin.findById(req.user.id).select('-password');
         res
             .status(200)
-            .json(user);
+            .json(admin);
     } catch (err) {
         console.error(err);
         res.status(500).send({ errors: [{ msg: "Can't be resolved" }] });
@@ -18,9 +18,9 @@ const getUser = async (req, res) => {
 };
 
 
-const createUser = async (req, res) => {
+const createAdmin = async (req, res) => {
     // grab user info from the body
-    const { avatar, fullname, staffId, role, email, password } = req.body;
+    const { email, ...rest } = req.body;
 
 
 
@@ -31,23 +31,19 @@ const createUser = async (req, res) => {
     }
 
     // check if user exists
-    const userExist = await User.findOne({ email })
+    const userExist = await Admin.findOne({ email })
 
     if (userExist) {
         return res
             .status(409)
-            .json({ errors: [{ msg: 'User conflict, pick a new one' }] })
+            .json({ errors: [{ msg: 'Admin conflict, pick a new one' }] })
     }
 
     try {
-        // create a new user instance
-        const user = await User.create({
-            avatar,
-            fullname,
+        // create a new admin instance
+        const admin = await Admin.create({
             email,
-            staffId,
-            role,
-            password
+            ...rest
         })
 
 
@@ -55,12 +51,12 @@ const createUser = async (req, res) => {
         bcrypt.genSalt(10, async (err, salt) => {
             if (err) throw err;
             // create hash
-            const hashed = await bcrypt.hash(user.password, salt);
+            const hashed = await bcrypt.hash(admin.password, salt);
 
             // generate token here
             const payload = {
                 user: {
-                    id: user._id
+                    id: admin._id
                 }
             };
 
@@ -71,16 +67,16 @@ const createUser = async (req, res) => {
                 (error, token) => {
                     if (error) throw error;
 
-                    user.token = token
+                    admin.token = token
                 }
             )
 
             // save user
-            user.password = hashed;
+            admin.password = hashed;
 
-            await user.save();
+            await admin.save();
 
-            res.status(201).json(user)
+            res.status(201).json(admin)
         })
     } catch (error) {
         console.error(error)
@@ -89,7 +85,7 @@ const createUser = async (req, res) => {
 };
 
 
-const authUser = async (req, res) => {
+const authAdmin = async (req, res) => {
     // create error errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -101,17 +97,17 @@ const authUser = async (req, res) => {
 
     try {
         // find the user 
-        let user = await User.findOne({ email });
+        let admin = await Admin.findOne({ email });
 
         // verify user details
-        if (!user) {
+        if (!admin) {
             return res
                 .status(400)
                 .json({ errors: [{ msg: 'Invalid Credentials' }] });
         }
 
         // check password validity
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, admin.password);
 
         if (!isMatch) {
             return res
@@ -132,11 +128,11 @@ const authUser = async (req, res) => {
             async (err, token) => {
                 if (err) throw err;
                 // set token and send user back
-                user.token = token;
+                admin.token = token;
 
-                await user.save();
+                await admin.save();
 
-                res.status(200).json(user)
+                res.status(200).json(admin)
             }
         );
     } catch (err) {
@@ -146,7 +142,7 @@ const authUser = async (req, res) => {
 }
 
 module.exports = {
-    createUser,
-    getUser,
-    authUser
+    createAdmin,
+    getAdmin,
+    authAdmin
 }

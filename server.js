@@ -11,6 +11,8 @@ const path = require('path');
 const Upload = require('./router/upload.js');
 const User = require('./router/user.js')
 const Profile = require('./router/profile.js')
+const Academic = require('./router/academic.js')
+const Admin = require('./router/admin.js')
 
 // setup express
 const server = express();
@@ -36,5 +38,8 @@ mongoose
 server.use('/user', User);
 server.use('/upload', Upload)
 server.use('/profile', Profile)
+server.use('/academic', Academic)
+server.use('/admin', Admin)
+
 // server lauching
 server.listen(process.env.PORT, () => console.log("Server Started and Ready..."))
