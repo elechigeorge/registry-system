@@ -11,6 +11,10 @@ import AdminRegisterScreen from './screens/AdminRegisterScreen';
 import StaffDashboardScreen from './screens/StaffDashboardScreen';
 import AdminDashboardScreen from './screens/AdminDashboardScreen';
 
+import AboutScreen from './screens/AboutScreen';
+import FAQScreen from './screens/FAQScreen';
+import HelpScreen from './screens/HelpScreen';
+
 
 
 const App = () => {
@@ -28,6 +32,10 @@ const App = () => {
 
           <Route path='/staff/dashboard' component={StaffDashboardScreen} />
           <Route path='/admin/dashboard' component={AdminDashboardScreen} />
+
+          <Route path='/about' component={AboutScreen} />
+          <Route path='/help' component={HelpScreen} />
+          <Route path='/faq' component={FAQScreen} />
 
         </Container>
       </main>
