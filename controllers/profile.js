@@ -21,6 +21,23 @@ const getProfile = async (req, res) => {
     }
 };
 
+// get profile
+const getAllProfile = async (req, res) => {
+    try {
+        const profile = await Profile.fin({}).populate('user');
+
+        if (!profile) {
+            return res.status(400).json({ msg: 'There is no profile ' });
+        }
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+};
+
+
 // create profile
 const createProfile = async (req, res) => {
     const errors = validationResult(req);
@@ -63,5 +80,6 @@ const createProfile = async (req, res) => {
 
 module.exports = {
     createProfile,
-    getProfile
+    getProfile,
+    getAllProfile
 }
