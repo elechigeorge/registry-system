@@ -69,8 +69,25 @@ const createAcademic = async (req, res) => {
     }
 };
 
+// get profile
+const getAllAcademic = async (req, res) => {
+    try {
+        const academic = await Academic.find({}).populate('user');
+
+        if (!academic) {
+            return res.status(400).json({ msg: 'There is no profile ' });
+        }
+
+        res.json(academic);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+};
+
 
 module.exports = {
     createAcademic,
-    getAcademic
+    getAcademic,
+    getAllAcademic
 }

@@ -1,6 +1,6 @@
-import axios from 'axios'
+import api from '../utils/api'
 import {
- 
+
     USER_LOGIN_FAILED,
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
@@ -8,7 +8,7 @@ import {
     USER_REGISTER_FAILED,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
-} from '../constants/types.js'
+} from '../constants/types.js';
 
 
 export const login = (email, password) => async (dispatch) => {
@@ -23,8 +23,8 @@ export const login = (email, password) => async (dispatch) => {
             },
         }
 
-        const { data } = await axios.post(
-            '/accounts/login',
+        const { data } = await api.post(
+            '/user/login',
             { email, password },
             config
         )
@@ -52,12 +52,13 @@ export const logout = () => (dispatch) => {
 
     dispatch({ type: USER_LOGOUT })
 
-    document.location.href = '/login';
+    document.location.href = '/staff/login';
 }
 
-export const register = (staffID, fullname, email) => async (dispatch) => {
+export const register = (staffId, fullname, email, role, avatar, password) => async (dispatch) => {
 
-    console.log(staffID)
+    console.log(staffId)
+
     try {
         dispatch({
             type: USER_REGISTER_REQUEST,
@@ -69,10 +70,10 @@ export const register = (staffID, fullname, email) => async (dispatch) => {
             },
         }
 
-        const { data } = await axios.post(
-            '/accounts',
+        const { data } = await api.post(
+            '/user',
             {
-                staffID, fullname, email
+                staffId, fullname, email, password, role, avatar
             },
             config
         )

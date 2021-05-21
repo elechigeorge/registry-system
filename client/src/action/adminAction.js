@@ -1,4 +1,4 @@
-import axios from 'axios'
+import api from '../utils/api'
 import {
     ADMIN_LOGIN_FAILED,
     ADMIN_LOGIN_REQUEST,
@@ -24,7 +24,7 @@ export const login = (email, password) => async (dispatch) => {
             },
         }
 
-        const { data } = await axios.post(
+        const { data } = await api.post(
             '/admin/login',
             { email, password },
             config
@@ -52,7 +52,7 @@ export const logout = () => (dispatch) => {
 
     dispatch({ type: ADMIN_LOGOUT })
 
-    document.location.href = '/login'
+    document.location.href = '/admin/login'
 }
 
 
@@ -68,7 +68,7 @@ export const register = (staffId, name, email, role, password) => async (dispatc
             },
         }
 
-        const { data } = await axios.post(
+        const { data } = await api.post(
             '/admin',
             { staffId, name, email, role, password },
             config

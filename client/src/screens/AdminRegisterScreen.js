@@ -5,16 +5,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { register, getAllMembers } from '../actions/adminActions'
+import { register } from '../action/adminAction'
 
 
-const RegisterScreen = ({ location, history }) => {
+const RegisterScreen = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [staffID, setStaffID] = useState('')
+    const [staffId, setStaffID] = useState('')
     const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [message, setMessage] = useState(null)
+    const [role, setRole] = useState('')
+
 
     const dispatch = useDispatch()
 
@@ -25,34 +25,26 @@ const RegisterScreen = ({ location, history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (password !== confirmPassword) {
-            setMessage('Passwords do not match')
-        } else {
-            dispatch(register(staffID, name, email, password))
-        }
+        dispatch(register(staffId, name, email, role, password))
     }
 
-    useEffect(() => {
-        dispatch(getAllMembers())
-    }, [dispatch])
-
     if (adminInfo) {
-        return <Redirect to="/dashboard" />
+        return <Redirect to="/admin/dashboard" />
     }
 
     return (
         <FormContainer>
-            <h1>Admin Register </h1>
-            {message && <Message variant='danger'>{message}</Message>}
+            <h1>Register an account </h1>
+
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='name'>
-                    <Form.Label>Staff ID</Form.Label>
+                    <Form.Label>Identification</Form.Label>
                     <Form.Control
                         type='name'
-                        placeholder='Enter Staff ID'
-                        value={staffID}
+                        placeholder='Enter Deployment ID'
+                        value={staffId}
                         onChange={(e) => setStaffID(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
@@ -78,6 +70,17 @@ const RegisterScreen = ({ location, history }) => {
                     ></Form.Control>
                 </Form.Group>
 
+                <Form.Group controlId='role'>
+                    <Form.Label>Designation</Form.Label>
+                    <Form.Control
+                        type='text'
+                        placeholder='Enter designation'
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                    ></Form.Control>
+                    <Form.Text>i.e. Registrar, Rectory, etc...</Form.Text>
+                </Form.Group>
+
                 <Form.Group controlId='password'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
@@ -88,25 +91,17 @@ const RegisterScreen = ({ location, history }) => {
                     ></Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId='confirmPassword'>
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        placeholder='Confirm password'
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    ></Form.Control>
-                </Form.Group>
 
-                <Button type='submit' variant='success' className="btn-block">
+
+                <Button type='submit' variant='dark' className="btn-block">
                     Register
         </Button>
             </Form>
 
             <Row className='py-3'>
                 <Col>
-                    Have an Account?{' '}
-                    <Link to={'/login'}>
+                    Have an Account? {' '}
+                    <Link to={'/admin/login'}>
                         Login
           </Link>
                 </Col>

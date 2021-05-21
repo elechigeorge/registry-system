@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 // import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 
-// import { logout } from '../actions/userActions';
-// import { logout as log } from '../actions/adminActions'
+import { logout } from '../action/userAction';
+import { logout as log } from '../action/adminAction'
 import Logo from '../images/rugi.jpg'
 
 const Header = () => {
@@ -14,12 +14,19 @@ const Header = () => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
+    const adminLogin = useSelector((state) => state.adminLogin)
+    const { adminInfo } = adminLogin
 
 
     const logoutAdmin = () => {
+        if (userInfo) {
+            dispatch(logout())
+        } else {
+            dispatch(log())
+        }
+
 
     }
-
 
 
     return (
@@ -37,7 +44,7 @@ const Header = () => {
 
                         <Nav className='ml-auto'>
 
-                            {userInfo ? (
+                            {userInfo || adminInfo ? (
                                 <>
 
 
@@ -51,6 +58,9 @@ const Header = () => {
                                         <Nav.Link href="/about">About</Nav.Link>
                                         <Nav.Link href="/help">Help</Nav.Link>
                                         <Nav.Link href="/faq">FAQ</Nav.Link>
+
+                                        <Nav.Link href="/staff/login">Staff</Nav.Link>
+                                        <Nav.Link href="/admin/login">Administrator</Nav.Link>
                                     </>
                                 )}
 
@@ -68,10 +78,7 @@ const Header = () => {
                             ) : ''} */}
 
                         </Nav>
-                        <Nav >
-                            <Nav.Link href="/login">Staff</Nav.Link>
-                            <Nav.Link href="/admin/login">Registry</Nav.Link>
-                        </Nav>
+
 
                     </Navbar.Collapse>
                 </Container>

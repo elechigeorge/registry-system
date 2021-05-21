@@ -6,7 +6,6 @@ body {
   src: url('https://fonts.googleapis.com/css2?family=KoHo&display=swap');
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: black !important;
 }
 
 code {

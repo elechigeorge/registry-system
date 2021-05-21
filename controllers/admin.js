@@ -117,7 +117,7 @@ const authAdmin = async (req, res) => {
 
         const payload = {
             user: {
-                id: user._id
+                id: admin._id
             }
         };
 

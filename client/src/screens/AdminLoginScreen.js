@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
-import { login } from '../actions/adminActions';
+import { login } from '../action/adminAction';
 
-const LoginScreen = ({ location, history }) => {
+const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -25,7 +25,7 @@ const LoginScreen = ({ location, history }) => {
 
 
     if (adminInfo) {
-        return <Redirect to="/dashboard" />
+        return <Redirect to="/admin/dashboard" />
     }
 
     return (
@@ -62,15 +62,15 @@ const LoginScreen = ({ location, history }) => {
                         ></Form.Control>
                     </Form.Group>
 
-                    <Button type='submit' variant='success' className="btn-block">
+                    <Button type='submit' variant='dark' className="btn-block">
                         Login
         </Button>
                 </Form>
 
                 <Row className='py-3'>
                     <Col>
-                        New Admin ?{' '}
-                        <Link to={'/register'}>
+                        Not registered ?{' '}
+                        <Link to={'/admin/register'}>
                             Register
           </Link>
                     </Col>

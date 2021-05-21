@@ -1,4 +1,4 @@
-import axios from 'axios'
+import api from '../utils/api'
 import {
     USER_CREATE_ACADEMICS_REQUEST,
     USER_CREATE_ACADEMICS_FAILED,
@@ -10,7 +10,7 @@ import {
     ADMIN_GET_ACADEMICS_REQUEST,
     ADMIN_GET_ACADEMICS_SUCCESS
 } from '../constants/types'
-import { logout } from './userActions'
+import { logout } from './userAction'
 
 export const getAcademic = () => async (dispatch, getState) => {
     try {
@@ -27,7 +27,7 @@ export const getAcademic = () => async (dispatch, getState) => {
             },
         }
 
-        const { data } = await axios.get("/academic", config)
+        const { data } = await api.get("/academic", config)
 
         dispatch({
             type: USER_GET_ACADEMICS_SUCCESS,
@@ -48,7 +48,7 @@ export const getAcademic = () => async (dispatch, getState) => {
 export const createAcademics = (academics) => async (dispatch, getState) => {
     try {
         dispatch({
-            type: USER_CREATE_PROFILE_REQUEST,
+            type: USER_CREATE_ACADEMICS_REQUEST,
         })
 
         const {
@@ -61,7 +61,7 @@ export const createAcademics = (academics) => async (dispatch, getState) => {
             },
         }
 
-        const { data } = await axios.post(`/academics`, profile, config)
+        const { data } = await api.post(`/academics`, academics, config)
 
         dispatch({
             type: USER_CREATE_ACADEMICS_SUCCESS,
@@ -97,7 +97,7 @@ export const getAllAcademics = () => async (dispatch, getState) => {
             },
         }
 
-        const { data } = await axios.get("/academics/get", config)
+        const { data } = await api.get("/academic/get", config)
 
         dispatch({
             type: ADMIN_GET_ACADEMICS_SUCCESS,
@@ -105,7 +105,7 @@ export const getAllAcademics = () => async (dispatch, getState) => {
         })
     } catch (error) {
         dispatch({
-            type: ADMIN_GET_PROFILE_FAILED,
+            type: ADMIN_GET_ACADEMICS_FAILED,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

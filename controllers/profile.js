@@ -24,7 +24,7 @@ const getProfile = async (req, res) => {
 // get profile
 const getAllProfile = async (req, res) => {
     try {
-        const profile = await Profile.fin({}).populate('user');
+        const profile = await Profile.find({}).populate('user');
 
         if (!profile) {
             return res.status(400).json({ msg: 'There is no profile ' });

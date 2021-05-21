@@ -1,4 +1,4 @@
-import axios from 'axios'
+import api from '../utils/api'
 import {
   USER_CREATE_PROFILE_REQUEST,
   USER_CREATE_PROFILE_FAILED,
@@ -10,7 +10,7 @@ import {
   ADMIN_GET_PROFILE_REQUEST,
   ADMIN_GET_PROFILE_SUCCESS
 } from '../constants/types'
-import { logout } from './userActions'
+import { logout } from './userAction'
 
 export const getProfile = () => async (dispatch, getState) => {
   try {
@@ -27,7 +27,7 @@ export const getProfile = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get("/profile", config)
+    const { data } = await api.get("/profile", config)
 
     dispatch({
       type: USER_GET_PROFILE_SUCCESS,
@@ -61,7 +61,7 @@ export const createProfile = (profile) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post(`/profile`, profile, config)
+    const { data } = await api.post(`/profile`, profile, config)
 
     dispatch({
       type: USER_CREATE_PROFILE_SUCCESS,
@@ -97,7 +97,7 @@ export const getAllProfiles = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get("/profile/get", config)
+    const { data } = await api.get("/profile/get", config)
 
     dispatch({
       type: ADMIN_GET_PROFILE_SUCCESS,

@@ -21,7 +21,7 @@ function HomeScreen() {
                         className="d-block w-100"
                         src={One}
                         alt="First slide"
-                        style={{ height: '70vh' }}
+                        style={{ height: '85vh' }}
                     />
                     <Carousel.Caption>
                         <h3>Office of the burser</h3>
@@ -33,7 +33,7 @@ function HomeScreen() {
                         className="d-block w-100"
                         src={Two}
                         alt="Second slide"
-                        style={{ height: '70vh' }}
+                        style={{ height: '85vh' }}
                     />
 
                     <Carousel.Caption>
@@ -46,7 +46,7 @@ function HomeScreen() {
                         className="d-block w-100"
                         src={Three}
                         alt="Third slide"
-                        style={{ height: '70vh' }}
+                        style={{ height: '85vh' }}
                     />
 
                     <Carousel.Caption>
@@ -57,11 +57,7 @@ function HomeScreen() {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-            <hr />
-            <Container>
-                <h3>About AARIS</h3>
-                <p className="lead"> AARIS is an acronym for ....</p>
-            </Container>
+
 
         </div>
     );
