@@ -4,6 +4,8 @@ import {
     USER_CREATE_ACADEMICS_SUCCESS,
 
     USER_GET_ACADEMICS_REQUEST,
+    USER_GET_ACADEMICS_FAILED,
+    USER_GET_ACADEMICS_SUCCESS,
 
     ADMIN_GET_ACADEMICS_FAILED,
     ADMIN_GET_ACADEMICS_REQUEST,
@@ -33,9 +35,9 @@ export const getAcademicsReducer = (
     switch (action.type) {
         case USER_GET_ACADEMICS_REQUEST:
             return { ...state, loading: true }
-        case USER_CREATE_ACADEMICS_SUCCESS:
+        case USER_GET_ACADEMICS_SUCCESS:
             return { loading: false, academic: action.payload }
-        case USER_CREATE_ACADEMICS_FAILED:
+        case USER_GET_ACADEMICS_FAILED:
             return { loading: false, error: action.payload }
         default:
             return state

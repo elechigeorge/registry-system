@@ -7,7 +7,7 @@ const { validationResult } = require('express-validator')
 const getProfile = async (req, res) => {
     try {
         const profile = await Profile.findOne({
-            user: req.user.id
+            user: req.user
         }).populate('user', ['avatar', 'fullname', 'email', 'staffId']);
 
         if (!profile) {

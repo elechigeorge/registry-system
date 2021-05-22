@@ -1,11 +1,11 @@
 import React, { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ListGroup, Table, Button, Badge } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getAllProfiles } from '../action/profileAction';
 import { getAllAcademics } from '../action/academicAction';
-
+import Moment from 'react-moment';
 
 function StaffProfileListScreen() {
 
@@ -54,16 +54,17 @@ function StaffProfileListScreen() {
                             <ListGroup.Item>Name: {profile.user.fullname}</ListGroup.Item>
                             <ListGroup.Item>Gender: {profile.gender}</ListGroup.Item>
                             <ListGroup.Item>Number of Children: {profile.children}</ListGroup.Item>
-                            <ListGroup.Item>Marital Sttatus: {profile.marital_status}</ListGroup.Item>
+                            <ListGroup.Item>Date of Birth: <Moment format="YYYY/MM/DD">{profile.birth_date}</Moment></ListGroup.Item>
+                            <ListGroup.Item>Marital Status: {profile.marital_status}</ListGroup.Item>
                             <ListGroup.Item>Staff ID: {profile.user.staffId}</ListGroup.Item>
                             <ListGroup.Item>Email: {profile.user.email}</ListGroup.Item>
                             <ListGroup.Item>LGA: {profile.lga}</ListGroup.Item>
                             <ListGroup.Item>State: {profile.state}</ListGroup.Item>
-                            <ListGroup.Item>Role: {profile.user.role}</ListGroup.Item>
+
                             <ListGroup.Item>Department: {profile.department}</ListGroup.Item>
                             <ListGroup.Item>Status: {profile.status}</ListGroup.Item>
-                            <ListGroup.Item>Date of First Appointment: {profile.fa_date}</ListGroup.Item>
-                            <ListGroup.Item>Date of Last Upgrade: {profile.upgrade_date}</ListGroup.Item>
+                            <ListGroup.Item>Date of First Appointment: <Moment fromNow>{profile.fa_date}</Moment></ListGroup.Item>
+                            <ListGroup.Item>Date of Last Upgrade: <Moment fromNow>{profile.upgrade_date}</Moment></ListGroup.Item>
                             <ListGroup.Item>File Number: {profile.file_no}</ListGroup.Item>
                             <ListGroup.Item>Remark: {profile.remark}</ListGroup.Item>
                         </Fragment>

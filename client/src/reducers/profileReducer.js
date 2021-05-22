@@ -32,10 +32,10 @@ export const getProfileReducer = (
 ) => {
     switch (action.type) {
         case USER_GET_PROFILE_REQUEST:
-            return { ...state, loading: true }
-        case USER_CREATE_PROFILE_SUCCESS:
+            return { loading: true, profile: {} }
+        case USER_GET_PROFILE_SUCCESS:
             return { loading: false, profile: action.payload }
-        case USER_CREATE_PROFILE_FAILED:
+        case USER_GET_PROFILE_FAILED:
             return { loading: false, error: action.payload }
         default:
             return state

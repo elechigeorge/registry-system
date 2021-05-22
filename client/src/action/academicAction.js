@@ -61,7 +61,7 @@ export const createAcademics = (academics) => async (dispatch, getState) => {
             },
         }
 
-        const { data } = await api.post(`/academics`, academics, config)
+        const { data } = await api.post(`/academic`, academics, config)
 
         dispatch({
             type: USER_CREATE_ACADEMICS_SUCCESS,
